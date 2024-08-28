@@ -120,18 +120,20 @@ def problem2(s1, s2):
         Lmatrix[i][0] = i
     for i in range(len(Lmatrix[0])):
         Lmatrix[0][i] = i
-    
+
     for i in range(1, len(Lmatrix)): # iterate through the rows
         for j in range(1, len(Lmatrix[0])): # iterate through the columns
             if s1[i - 1] == s2[j-1]: # if the characters are the same
                 Lmatrix[i][j] = Lmatrix[i - 1][j - 1]
             else:
-                Lmatrix[i][j] = min(Lmatrix[i][j-1], Lmatrix[i-1][j-1])+1
+                Lmatrix[i][j] = min(
+                    Lmatrix[i][j-1]+1, # insert (penalty of 1)
+                    Lmatrix[i-1][j-1]+2, # replace (penalty of 2)
+                    Lmatrix[i-1][j]+1)  # delete (penalty of 1)
     # DELETE THE LINE BELOW BEFORE SUBMISSION
     print(Lmatrix[-1][-1])
-    return Lmatrix[-1][-1] # return the last element of the last row of the L-matrix
-    
-	
+    return Lmatrix[-1][-1] # return the last element of the last row of the L-matrix (bottom right)
+
 
 # P2 TEST CODE START (COMMENT OR DELETE UPON SUBMISSION)
 
@@ -139,15 +141,18 @@ def problem2(s1, s2):
 # s1 = "abc"
 # s2 = "abbc"
 # problem2(s1, s2)
+# Should return 1
 
 # P2 Test set 2
 # s1 = "rjkl;34lkj 34 .!@#\n"
 # s2 = "®jkl;34lK j 34 .!@#\n\t"
 # problem2(s1, s2)
+# Should return 6
 
 # P2 Test set 3
 # s1 = """Don't let your dreams be dreams\nYesterday you said tomorrow\nSo just do it\nMake your dreams come true\nJust do it"""
 # s2 = """Some people dream of success\nWhile you're gonna wake up and work hard at it\nNothing is impossible"""
 # problem2(s1, s2)
+# Should return 126
 
 # P2 TEST CODE END
