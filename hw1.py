@@ -58,7 +58,7 @@ def problem1(NPs, s):
 		r'(\w+) is (\w+)',
 		r'(\w+) is a type of (\w+)',
 		r'(\w+) is a kind of (\w+)',
-		r'(\w+) was an? (\w+)', # was an? is used to match 'was a' and 'was an'
+		r'(\w+) was an? (\w+)', # was an? is used to match 'was a' or 'was an'
 		r'(\w+) was a type of (\w+)',
 		r'(\w+) was a kind of (\w+)',
 		r'(\w+) are ([\w\s]+)',
@@ -74,8 +74,7 @@ def problem1(NPs, s):
                 hypernyms.add((hypernym, hyponym))
     # create a list of Hearst Patterns where order is hyponym -> hypernym
     patterns2 = [
-		# r'(\w+)[, ] such as ([\w\s]+)[, ](and|or)?[\w\s]', 
-        r'(\w+)[, ] such as ([\w\s]+)(,? (and|or)?[\w\s]+)?', 
+        r'(\w+)[, ] such as ([\w\s]+)(,? (and|or)?[\w\s]+)?', # such as pattern with optional and/or /commas
 		r'(\w+) such as (\w+)',
 		r'(\w+)[, ] including (\w+)',
 		r'(\w+)[, ](\w+)',
@@ -94,26 +93,61 @@ def problem1(NPs, s):
     # print(hypernyms)
     return hypernyms
 
-# TEST CODE START (COMMENT OR DELETE UPON SUBMISSION)
+# P1 TEST CODE START (COMMENT OR DELETE UPON SUBMISSION)
 
-# Test set 1
+# P1 Test set 1
 # NPs = ['dogs', 'cats', 'mammals', 'living things']
 # s = "All mammals, such as dogs and cats, eat to survive. Mammals are living things, aren't they?"
 # problem1(NPs, s)
 
-# Test set 2
+# P1 Test set 2
 # NPs = ['animals', 'dogs', 'cats']
 # s = "Some animals, including cats, are considered. But it is NOT true that dogs are animals; I refuse to accept it."
 # problem1(NPs, s)
 
-# Test set 3
+# P1 Test set 3
 # NPs = ['hemingway', 'bibliophile', 'author', 'william faulkner', 'mark twain']
 # s = "Hemingway was an author of many classics. But also, Hemingway was a bibliophile, having read the works of every other famous American author, such as William Faulkner and Mark Twain."
 # problem1(NPs, s)
 
-# TEST CODE END
+# P1 TEST CODE END
+
 
 # PROBLEM 2
 def problem2(s1, s2):
-    pass
+    Lmatrix = [[0 for i in range(len(s2) + 1)] for j in range(len(s1) + 1)] # create an  L-matrix of 0s with dimensions len(s1) + 1 x len(s2) + 1
+    for i in range(len(Lmatrix)):
+        Lmatrix[i][0] = i
+    for i in range(len(Lmatrix[0])):
+        Lmatrix[0][i] = i
+    
+    for i in range(1, len(Lmatrix)): # iterate through the rows
+        for j in range(1, len(Lmatrix[0])): # iterate through the columns
+            if s1[i - 1] == s2[j-1]: # if the characters are the same
+                Lmatrix[i][j] = Lmatrix[i - 1][j - 1]
+            else:
+                Lmatrix[i][j] = min(Lmatrix[i][j-1], Lmatrix[i-1][j-1])+1
+    # DELETE THE LINE BELOW BEFORE SUBMISSION
+    print(Lmatrix[-1][-1])
+    return Lmatrix[-1][-1] # return the last element of the last row of the L-matrix
+    
 	
+
+# P2 TEST CODE START (COMMENT OR DELETE UPON SUBMISSION)
+
+# P2 Test set 1
+# s1 = "abc"
+# s2 = "abbc"
+# problem2(s1, s2)
+
+# P2 Test set 2
+# s1 = "rjkl;34lkj 34 .!@#\n"
+# s2 = "®jkl;34lK j 34 .!@#\n\t"
+# problem2(s1, s2)
+
+# P2 Test set 3
+# s1 = """Don't let your dreams be dreams\nYesterday you said tomorrow\nSo just do it\nMake your dreams come true\nJust do it"""
+# s2 = """Some people dream of success\nWhile you're gonna wake up and work hard at it\nNothing is impossible"""
+# problem2(s1, s2)
+
+# P2 TEST CODE END
