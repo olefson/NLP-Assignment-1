@@ -76,7 +76,7 @@ def problem1(NPs, s):
     patterns2 = [
 		r'(\w+)[, ] such as ([\w\s]+)[, ](and|or)?[\w\s]', 
 		r'(\w+) such as (\w+)',
-		r'(\w+)[, ](\w+)',
+		r'(\w+)[, ] including (\w+)',
 		r'(\w+)[, ](\w+)',
 		r'(\w+)[, ](\w+)'
 	]
@@ -86,19 +86,19 @@ def problem1(NPs, s):
             hypernym = match[0]
             hyponym_string = match[1].strip()
             
-        for np in NPs:
-            if np in hyponym_string and hypernym in NPs:
-                hypernyms.add((hypernym, np))
+            for np in NPs:
+                if np in hyponym_string and hypernym in NPs:
+                    hypernyms.add((hypernym, np))
     # DELETE THE LINE BELOW BEFORE SUBMISSION
-    print(hypernyms)
+    # print(hypernyms)
     return hypernyms
 
 # TEST CODE START (COMMENT OR DELETE UPON SUBMISSION)
 
 # Test set 1
-NPs = ['dogs', 'cats', 'mammals', 'living things']
-s = "All mammals, such as dogs and cats, eat to survive. Mammals are living things, aren't they?"
-problem1(NPs, s)
+# NPs = ['dogs', 'cats', 'mammals', 'living things']
+# s = "All mammals, such as dogs and cats, eat to survive. Mammals are living things, aren't they?"
+# problem1(NPs, s)
 
 # Test set 2
 # NPs = ['animals', 'dogs', 'cats']

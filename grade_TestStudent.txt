@@ -2,27 +2,23 @@
 TESTING ON INPUT PROBLEM:
 (['dogs', 'cats', 'mammals', 'living things'], "All mammals, such as dogs and cats, eat to survive. Mammals are living things, aren't they?")
 CORRECT OUTPUT:
-{('living things', 'mammals'), ('mammals', 'cats'), ('mammals', 'dogs')}
+{('mammals', 'dogs'), ('mammals', 'cats'), ('living things', 'mammals')}
 YOUR OUTPUT:
-{('mammals', 'living things'), ('mammals', 'cats'), ('mammals', 'dogs')}
-Incorrect (-10 points)
+{('mammals', 'dogs'), ('mammals', 'cats'), ('living things', 'mammals')}
+Correct!
 ==============================
 TESTING ON INPUT PROBLEM:
 (['animals', 'dogs', 'cats'], 'Some animals, including cats, are considered. But it is NOT true that dogs are animals; I refuse to accept it.')
 CORRECT OUTPUT:
-{('animals', 'cats'), ('animals', 'dogs')}
+{('animals', 'dogs'), ('animals', 'cats')}
 YOUR OUTPUT:
-Error while executing this problem: Traceback (most recent call last):
-  File "C:\Users\Owner\Desktop\Coding\USF\AI certification\Natural Language Processing\Projects\Assignment 1\HW1_grader.py", line 78, in <module>
-    result = problem1(P[0], P[1])
-  File "<string>", line 90, in problem1
-UnboundLocalError: local variable 'hyponym_string' referenced before assignment
-
+{('animals', 'dogs'), ('animals', 'cats')}
+Correct!
 ==============================
 TESTING ON INPUT PROBLEM:
 (['hemingway', 'bibliophile', 'author', 'william faulkner', 'mark twain'], 'Hemingway was an author of many classics. But also, Hemingway was a bibliophile, having read the works of every other famous American author, such as William Faulkner and Mark Twain.')
 CORRECT OUTPUT:
-{('bibliophile', 'hemingway'), ('author', 'mark twain'), ('author', 'hemingway'), ('author', 'william faulkner')}
+{('author', 'mark twain'), ('bibliophile', 'hemingway'), ('author', 'hemingway'), ('author', 'william faulkner')}
 YOUR OUTPUT:
 {('author', 'william faulkner')}
 Incorrect (-10 points)
@@ -53,4 +49,4 @@ Incorrect (-10 points)
 ==============================
 ==============================
 ==============================
-FINAL SCORE:40
+FINAL SCORE:60
