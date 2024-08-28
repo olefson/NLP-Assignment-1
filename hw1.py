@@ -69,7 +69,7 @@ def problem1(NPs, s):
     for pattern in patterns1: # iterate through each type 1 pattern
         matches = re.findall(pattern, s_lower)
         for match in matches:
-            hypernym, hyponym = match
+            hyponym, hypernym = match
             if hypernym in NPs and hyponym in NPs:
                 hypernyms.add((hypernym, hyponym))
     # create a list of Hearst Patterns where order is hyponym -> hypernym
@@ -90,15 +90,15 @@ def problem1(NPs, s):
             if np in hyponym_string and hypernym in NPs:
                 hypernyms.add((hypernym, np))
     # DELETE THE LINE BELOW BEFORE SUBMISSION
-    # print(hypernyms)
+    print(hypernyms)
     return hypernyms
 
 # TEST CODE START (COMMENT OR DELETE UPON SUBMISSION)
 
 # Test set 1
-# NPs = ['dogs', 'cats', 'mammals', 'living things']
-# s = "All mammals, such as dogs and cats, eat to survive. Mammals are living things, aren't they?"
-# problem1(NPs, s)
+NPs = ['dogs', 'cats', 'mammals', 'living things']
+s = "All mammals, such as dogs and cats, eat to survive. Mammals are living things, aren't they?"
+problem1(NPs, s)
 
 # Test set 2
 # NPs = ['animals', 'dogs', 'cats']
