@@ -58,7 +58,7 @@ def problem1(NPs, s):
 		r'(\w+) is (\w+)',
 		r'(\w+) is a type of (\w+)',
 		r'(\w+) is a kind of (\w+)',
-		r'(\w+) was (\w+)',
+		r'(\w+) was an? (\w+)', # was an? is used to match 'was a' and 'was an'
 		r'(\w+) was a type of (\w+)',
 		r'(\w+) was a kind of (\w+)',
 		r'(\w+) are ([\w\s]+)',
@@ -74,7 +74,8 @@ def problem1(NPs, s):
                 hypernyms.add((hypernym, hyponym))
     # create a list of Hearst Patterns where order is hyponym -> hypernym
     patterns2 = [
-		r'(\w+)[, ] such as ([\w\s]+)[, ](and|or)?[\w\s]', 
+		# r'(\w+)[, ] such as ([\w\s]+)[, ](and|or)?[\w\s]', 
+        r'(\w+)[, ] such as ([\w\s]+)(,? (and|or)?[\w\s]+)?', 
 		r'(\w+) such as (\w+)',
 		r'(\w+)[, ] including (\w+)',
 		r'(\w+)[, ](\w+)',
