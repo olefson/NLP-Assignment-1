@@ -47,6 +47,12 @@ Outline:
 2. For each occurence, check if the noun phrases involved in pattern are in Nps
 3. If match is found and both x and y are oin Nps, add pair to hypernyms set
 4. Return hypernyms set
+
+Test case logs:
+1. (professor's requirment) NPs = ['dogs', 'cats', 'mammals', 'living things'] - Passed
+2. (professor's requirment) NPs = ['animals', 'dogs', 'cats'] - Passed
+3. (professor's requirment) NPs = ['hemingway', 'bibliophile', 'author', 'william faulkner', 'mark twain'] - Passed
+4. (personal test)
 """
 
 
@@ -89,8 +95,6 @@ def problem1(NPs, s):
             for np in NPs:
                 if np in hyponym_string and hypernym in NPs:
                     hypernyms.add((hypernym, np))
-    # DELETE THE LINE BELOW BEFORE SUBMISSION
-    # print(hypernyms)
     return hypernyms
 
 # P1 TEST CODE START (COMMENT OR DELETE UPON SUBMISSION)
@@ -113,7 +117,26 @@ def problem1(NPs, s):
 # P1 TEST CODE END
 
 
-# PROBLEM 2
+""" 
+PROBLEM 2
+Outline: 
+1. Create an L-matrix of dimensions len(s1) + 1 x len(s2) + 1
+2. Set the first row and column of the L-matrix to be the index of the row/column
+3. Iterate through the rows and columns of the L-matrix
+4. If the characters at the current indices are the same, set the current element to be the diagonal element
+5. If the characters are different, set the current element to be the minimum of the left, top, and diagonal elements + 1
+6. Return the bottom right element of the L-matrix
+
+Test case logs:
+1. (professor's requirment) s1 = "abc", s2 = "abbc" - Passed
+2. (professor's requirment) s1 = "rjkl;34lkj 34 .!@#\n", s2 = "®jkl;34lK j 34 .!@#\n\t" - Passed
+3. (professor's requirment) s1 = "Don't let your dreams be dreams\nYesterday you said tomorrow\nSo just do it\nMake your dreams come true\nJust do it", s2 = "Some people dream of success\nWhile you're gonna wake up and work hard at it\nNothing is impossible - Passed
+4. (personal test) s1 = "", s2 = "" - empty strings - Passed
+5. (personal test) s1 = "abc", s2 = "" - one empty string - Passed
+6. (personal test) s1 = "abc", s2 = "abc" - same strings - Passed
+7. (personal test) s1 = "a", s2 = "abcdef" - strings of different length - Passed
+6. (personal test) s1 = "hello!", s2 = "hello!" - same strings with punctuation - Passed
+"""
 def problem2(s1, s2):
     Lmatrix = [[0 for i in range(len(s2) + 1)] for j in range(len(s1) + 1)] # create an  L-matrix of 0s with dimensions len(s1) + 1 x len(s2) + 1
     for i in range(len(Lmatrix)):
@@ -130,8 +153,6 @@ def problem2(s1, s2):
                     Lmatrix[i][j-1]+1, # insert (penalty of 1)
                     Lmatrix[i-1][j-1]+2, # replace (penalty of 2)
                     Lmatrix[i-1][j]+1)  # delete (penalty of 1)
-    # DELETE THE LINE BELOW BEFORE SUBMISSION
-    print(Lmatrix[-1][-1])
     return Lmatrix[-1][-1] # return the last element of the last row of the L-matrix (bottom right)
 
 
@@ -155,4 +176,29 @@ def problem2(s1, s2):
 # problem2(s1, s2)
 # Should return 126
 
+# P2 Test set 4
+# s1 = ""
+# s2 = ""
+# problem2(s1, s2)
+# Should return 0
+
+#  P2 Test set 5
+# s1 = "abc"
+# s2 = ""
+# problem2(s1, s2)
+
+# P2 Test set 6
+# s1 = "abc"
+# s2 = "abc"
+# problem2(s1, s2)
+
+# P2 Test set 7
+# s1 = "a"
+# s2 = "abcdef"
+# problem2(s1, s2)
+
+# P2 Test set 8
+# s1 = "hello!"
+# s2 = "hello!"
+# problem2(s1, s2)
 # P2 TEST CODE END
